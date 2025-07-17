@@ -1,0 +1,193 @@
+// $Id: Functional_Group_Hierarchy.txt 4351 2011-01-10 08:54:31Z landrgr1 $
+// Created by Greg Landrum, October 2006
+//  Format: Name\tSmarts\tLabel\tRemovalReaction (optional)
+//
+//  NOTES:
+//     1) be sure to make the distinguishing feature of the functional group
+//        the first atom in the pattern
+//     2) the RemovalReaction (if present) is used to remove the functional
+//        group from the molecule. This is necessary for cases like boronic
+//        ethers where the full functional group cannot be specified in SMARTS.
+//
+Alkene	[CX3]=[CX3]
+Alkene.Substituted	[CX3]=C(C)(C)
+Alkene.Cyclic	C[CX3]=C(c)(C)
+Alkenyl.Halide	[F,Cl,Br,I][CX3]=[CX3]
+Diene		[C]=[C][C]=[C]
+Alkyne	[C]#[C]
+Ethyl chain	[*][CH2][CH3]
+Isopropyl chain	[*][CH]([CH3])([CH3])
+Cyclopropyl	C1CC1
+Cyclobutyl	C1CCC1
+Cyclopentyl	C1CCCC1
+
+Carboxylic Acids & Derivatives
+CarboxylicAcid			C(=O)[O;H,-]
+CarboxylicAcid.Aromatic		[$(C-!@[a])](=O)([O;H,-])
+CarboxylicAcid.Aliphatic	[$(C-!@[A;!O])](=O)([O;H,-])
+CarboxylicAcid.AlphaAmino	[$(C-[C;!$(C=[!#6])]-[N;!H0;!$(N-[!#6;!#1]);!$(N-C=[O,N,S])])](=O)([O;H,-])
+CarboxylicAcid.AlphaHalo	[F,Cl,Br,I]cc([$(C-!@[a])](=O)([O;H,-]))
+
+Acid Derivatives
+AcidChloride		C(=O)Cl
+AcidChloride.Aromatic	[$(C-!@[a])](=O)(Cl)
+AcidChloride.Aliphatic	[$(C-!@[A;!Cl])](=O)(Cl)
+Ester			[CX3](=O)[OX2H0][#6]
+Ester.Cyclic		[CX3;R](=O)[OX2H0;R]
+Anhydride		[CX3](=[OX1])[OX2][CX3](=[OX1])
+Lactone			[#6;r](=[OX1])[oX2;r]
+Peracid       		C(=O)OO[H]
+CarboxylicPhosphate  	C(=O)O[P]
+SulfonylChloride	[$(S-!@[#6])](=O)(=O)(Cl)
+SulfonylChloride.Aromatic	[$(S-!@c)](=O)(=O)(Cl)
+SulfonylChloride.Aliphatic	[$(S-!@C)](=O)(=O)(Cl)
+
+Amines
+Amine			[N;!H0;$(N-[#6]);!$(N-[!#6;!#1]);!$(N-C=[O,N,S])]
+Amine.Primary		[N;H2;D1;$(N-!@[#6]);!$(N-C=[O,N,S])]
+Amine.Primary.Aromatic	[N;H2;D1;$(N-!@c);!$(N-C=[O,N,S])]
+Amine.Primary.Aliphatic	[N;H2;D1;$(N-!@C);!$(N-C=[O,N,S])]
+Amine.Secondary		[N;H1;D2;$(N(-[#6])-[#6]);!$(N-[!#6;!#1]);!$(N-C=[O,N,S])]
+Amine.Secondary.Aromatic	[N;H1;D2;$(N(-[c])-[#6]);!$(N-[!#6;!#1]);!$(N-C=[O,N,S])]
+Amine.Secondary.Aliphatic	[N;H1;D2;$(N(-C)-C);!$(N-[!#6;!#1]);!$(N-C=[O,N,S])]
+Amine.Aromatic		[N;!H0;$(N-c);!$(N-[!#6;!#1]);!$(N-C=[O,N,S])]
+Amine.Aliphatic		[N;!H0;!$(N-c);$(N-C);!$(N-[!#6;!#1]);!$(N-C=[O,N,S])]
+Amine.Cyclic		[N;!H0;R;$(N-[#6]);!$(N-[!#6;!#1]);!$(N-C=[O,N,S])]
+
+Boronic Acids
+BoronicAcid		[$(B-!@[#6])](O)(O)
+BoronicAcid.Aromatic	[$(B-!@c)](O)(O)
+BoronicAcid.Aliphatic	[$(B-!@C)](O)(O)
+
+Isocyanate
+Isocyanate		[$(N-!@[#6])](=!@C=!@O)
+Isocyanate.Aromatic	[$(N-!@c)](=!@C=!@O)
+Isocyanate.Aliphatic	[$(N-!@C)](=!@C=!@O)
+
+Alcohols/Acetals/Epoxides
+Alcohol			[O;H1;$(O-!@[#6;!$(C=!@[O,N,S])])]
+Alcohol.Aromatic	[O;H1;$(O-!@c)]
+Alcohol.Aliphatic	[O;H1;$(O-!@[C;!$(C=!@[O,N,S])])]
+Acetal			[CX4](O)(O)
+Epoxide			[$([C;r3]-[O;r3]-[C;r3])]
+
+Carbonyl Compounds
+Aldehyde		[CX3H1](=O)[#6,#7]
+Aldehyde.Aromatic	[CH;D2;$(C-!@[a])](=O)
+Aldehyde.Aliphatic	[CH;D2;$(C-!@C)](=O)
+Ketone			[#6][CX3](=O)[#6]
+Enone			[#6]=[#6]-[#6](=O)
+Enone.Aromatic		[c]=[C]-[C](=O)
+Ene-dione		[CX3](=O)C=C[CX3](=O)
+
+Amides/Imides/Ureas
+Amide		[NX3][CX3]=[OX1]
+Acrylamide	[CX3]=C[CX3](=[OX1])[NX3]
+Diacrylamide	C=CC(=O)N1CCN(C(=O)C=C)CC1
+Imide		[CX3](=[OX1])[NX3H0]([#6])[CX3](=[OX1])
+Urea		[#7][#6](=O)[#7]
+Thioguanidine ester	[NX3]=[CX3]([NX3])[SX2]
+
+Halogens
+Halogen		[$([F,Cl,Br,I]-!@[#6]);!$([F,Cl,Br,I]-!@C-!@[F,Cl,Br,I]);!$([F,Cl,Br,I]-[C,S](=[D1;O,S,N]))]
+Halogen.Aromatic	[F,Cl,Br,I;$(*-!@c)]
+Halogen.Aliphatic	[$([F,Cl,Br,I]-!@C);!$([F,Cl,Br,I]-!@C-!@[F,Cl,Br,I])]
+Halo-2-N-Hetarene	[n][c]([F,Cl,Br,I])[c,n]
+Iodine.Hypervalent	[I]=O
+
+Nitrogen-Containing Groups
+Azide		[NX2,NX1-]=[NX2+]=[NX1,NX1-]
+Diazo		[$([#6]=[N+]=[N-]),$([#6-]-[N+]#[N])]
+Nitro		[$([NX3](=O)=O),$([NX3+](=O)[O-])][!#8]
+Nitrate		[$([NX3](=[OX1])(=[OX1])O),$([NX3+]([OX1-])(=[OX1])O)]
+Nitroso		[NX2](=O)
+N-oxide		[$([#7+][OX1-]),$([#7v5]=[OX1])]
+Oxime		[CX3](=N-O)
+Hydrazine	[NX3][NX3]
+Hydrazone	[NX3][NX2]=[*]
+Hydroxylamine	[NX3][OX2]
+Hydrazine	[NX3][NX3]
+Enamine		[n,NX3][CX3]=[CX3]
+Amidine		[NX3][CX3]=[NX2]
+
+Sulfur Compounds
+SulfonylChloride	[$(S-!@[#6])](=O)(=O)(Cl)
+SulfonylFluoride     	[$(S-!@[#6])](=O)(=O)(F)
+Sulfonamide		[$([#16X4]([NX3])(=[OX1])(=[OX1])[#6]),$([#16X4+2]([NX3])([OX1-])([OX1-])[#6])]
+Sulfonic acid/ester	[OX2,-]S(=O)(=O)(*)
+Sulfone			[$([#16X4](=[OX1])(=[OX1])([#6])[#6])]
+Sulfoxide		[$([#16X3]=[OX1]),$([#16X3+][OX1-])]
+Sulfinate		[$([#16X3](=[OX1])[OX2H0]),$([#16X3+]([OX1-])[OX2H0])]
+Thiol			[#16!H0]
+Isothiocyanate		[NX2]=[C]=[S]
+Thiourea		[NX3][CX3]=[SX1][#6]
+Thioamide		[NX3][CX3]=[SX1]
+Thione			[#6]=S
+Sulfide			[c,C]SC
+
+Rings and Heterocycles
+Dihydropyrrole		C1C=CC[NH]1
+2-Pyridone		O=c1n*ccc1
+4-Pyridone		O=c1ccncc1
+Pyran-one		O=c1ccocc1
+
+Miscellaneous
+Isonitrile		[CX1-]#[NX2+]
+Ene.Nitrile		[CX3]=[CX3]-C#N
+N-Carbonyl.Amine	*C(=O)N(C(*)([H])[H])C(*)([H])[H]
+N-Boc.Aliphatic.Amine	*C([H])([H])N(C(=O)OC(C)(C)C)C(*)([H])[H]
+N-Acyl.Aliphatic.Amine	*C([H])([H])N(C(=O)C([H])([H])[H])C(*)([H])[H]
+N-Chloroacetamide	*C([H])([H])N(C(=O)C[Br,I,Cl,F])C(*)([H])[H]
+Aromatic N+		[n+]
+Aliphatic N+		[N+]
+
+Metals/Elements
+zinc		[Zn]
+magnesium	[Mg]
+lithium		[Li]
+tin		[Sn]
+copper		[Cu]
+silicon		[Si]
+palladium	[Pd]
+boron		[B]
+Ruthenium	[Ru]
+Germanium	[Ge]
+Aluminium	[Al+3]
+Deuterium	[2H]
+13C		[13c,13C]
+15N		[15n,15N]
+all-substit benzene		[cH0]1[cH0][cH0][cH0][cH0][cH0]1
+		
+
+
+//  Copyright (c) 2010, Novartis Institutes for BioMedical Research Inc.
+//  All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met: 
+//
+//     * Redistributions of source code must retain the above copyright 
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+//       copyright notice, this list of conditions and the following 
+//       disclaimer in the documentation and/or other materials provided 
+//       with the distribution.
+//     * Neither the name of Novartis Institutes for BioMedical Research Inc. 
+//       nor the names of its contributors may be used to endorse or promote 
+//       products derived from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+
+
